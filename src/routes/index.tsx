@@ -1,39 +1,22 @@
 import { createFileRoute } from '@tanstack/react-router'
-import logo from '../logo.svg'
+import { Camera } from '../components/Camera'
 
 export const Route = createFileRoute('/')({
-  component: App,
+  component: HomePage,
 })
 
-function App() {
+function HomePage() {
   return (
-    <div className="text-center">
-      <header className="min-h-screen flex flex-col items-center justify-center bg-[#282c34] text-white text-[calc(10px+2vmin)]">
-        <img
-          src={logo}
-          className="h-[40vmin] pointer-events-none animate-[spin_20s_linear_infinite]"
-          alt="logo"
-        />
-        <p>
-          Edit <code>src/routes/index.tsx</code> and save to reload.
+    <div className="container mx-auto flex min-h-screen flex-col items-center justify-center gap-8 p-4">
+      <div className="text-center">
+        <h1 className="text-4xl font-bold tracking-tight lg:text-5xl">
+          Food Logger
+        </h1>
+        <p className="mt-2 text-lg text-muted-foreground">
+          Take a picture of your food to get started.
         </p>
-        <a
-          className="text-[#61dafb] hover:underline"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <a
-          className="text-[#61dafb] hover:underline"
-          href="https://tanstack.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn TanStack
-        </a>
-      </header>
+      </div>
+      <Camera />
     </div>
   )
 }

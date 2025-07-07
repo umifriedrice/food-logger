@@ -13,6 +13,7 @@ import TanStackQueryLayout from '../integrations/tanstack-query/layout.tsx'
 import appCss from '../styles.css?url'
 
 import type { QueryClient } from '@tanstack/react-query'
+import { CapturedImageProvider } from '../context/CapturedImageContext'
 
 interface MyRouterContext {
   queryClient: QueryClient
@@ -42,12 +43,12 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
   component: () => (
     <RootDocument>
-      <Header />
-
-      <Outlet />
-      <TanStackRouterDevtools />
-
-      <TanStackQueryLayout />
+      <CapturedImageProvider>
+        <Header />
+        <Outlet />
+        <TanStackRouterDevtools />
+        <TanStackQueryLayout />
+      </CapturedImageProvider>
     </RootDocument>
   ),
 })

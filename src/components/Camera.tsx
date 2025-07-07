@@ -1,7 +1,13 @@
 import { useCamera } from '../hooks/useCamera'
 import { Button } from './ui/button'
+import { useCapturedImage } from '../context/CapturedImageContext'
+import React from 'react'
 
-export function Camera() {
+interface CameraProps {
+  onImageChange?: (img: string | null) => void
+}
+
+export function Camera({ onImageChange }: CameraProps) {
   const {
     cameraState,
     videoRef,
@@ -11,6 +17,13 @@ export function Camera() {
     captureImage,
     reset,
   } = useCamera()
+  const { setCapturedImage: setGlobalCapturedImage } = useCapturedImage()
+
+  React.useEffect(() => {
+    if (onImageChange) {
+      onImageChange(capturedImage)
+    }
+  }, [capturedImage, onImageChange])
 
   if (error) {
     return (
@@ -63,7 +76,12 @@ export function Camera() {
             />
           </div>
           <div className="flex gap-2">
-            <Button onClick={reset}>Take Another Picture</Button>
+            <Button onClick={() => {
+              setGlobalCapturedImage(capturedImage)
+              reset()
+            }}>
+              Take Another Picture
+            </Button>
           </div>
         </>
       )}
